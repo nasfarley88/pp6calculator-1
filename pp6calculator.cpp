@@ -73,6 +73,7 @@ public:
     return lengthOfThis;
   }
 
+
   FourVector(double t_, double x_, double y_, double z_)
     :t(t_), x(x_), y(y_), z(z_)
   {
@@ -88,6 +89,22 @@ public:
     double zprime = gamma*(z-beta*t);
     t = tprime;
     z = zprime;
+    return *this;
+  }
+
+  // overloading those operator functions
+  FourVector& operator+=(const FourVector& rhs)
+  {
+    t += rhs.gett(); x += rhs.getx(); y += rhs.gety(); z += rhs.getz();
+    return *this;
+  }
+
+  FourVector& operator=(const FourVector& rhs)
+  {
+    if (&rhs !=this)
+      {
+	t = rhs.gett(); x = rhs.getx(); y = rhs.gety(); z = rhs.getz();
+      }
     return *this;
   }
 
@@ -107,7 +124,7 @@ void pp6day3_menu() {
 
   while (true)
     {
-      std::cout << "PP6Calculator - Day 3 Menu" <<std::endl;
+      std::cout << "PP6Calculator - Day 3 Menu" << std::endl;
       std::cout << "==========================" << std::endl;
       std::cout << "Enter the operation you would like to perform:" << std::endl;
       std::cout << "1) Calculate the length of a four vector" << std::endl;
