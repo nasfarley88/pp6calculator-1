@@ -6,6 +6,21 @@
 #include "PP6Day1Menu.hpp"
 #include "PP6Day2Menu.hpp"
 
+
+struct FourVector
+{
+  // This struct (and anything that uses it) assumes c=1
+  double t,x,y,z;
+};
+
+FourVector boostAlongZAxis(FourVector w, double beta) {
+  double gamma = 1/(1-beta*beta);
+  double tprime = gamma*(w.t-beta*w.z);
+  double zprime = gamma*(w.z-beta*w.t);
+  FourVector wprime = {tprime,w.x,w.y,zprime};
+  return wprime;
+}
+
 //----------------------------------------------------------------------
 // Main program
 //
