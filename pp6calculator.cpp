@@ -7,19 +7,77 @@
 #include "PP6Day2Menu.hpp"
 
 
-struct FourVectorStruct
-{
-  // This struct (and anything that uses it) assumes c=1
-  double t,x,y,z;
-};
 
 class FourVector
 {
-public:
+private:
   double t,x,y,z;
 
+  double lengthOfFourVector() const
+  {
+    double c = 299792458;
+    return -(c*t)*(c*t)+x*x+y*y+z*z;
+  }
+
+  double lengthOfThis;
+
+public:
+
+  double gett() const
+  {
+    return t;
+  }
+
+  double getx() const
+  {
+    return x;
+  }
+
+  double gety() const
+  {
+    return y;
+  }
+
+  double getz() const
+  {
+    return x;
+  }
+
+  void sett(double t_)
+  {
+    t = t_;
+    lengthOfThis = lengthOfFourVector();
+  }
+
+  void setx(double x_)
+  {
+    x = x_;
+    lengthOfThis = lengthOfFourVector();
+  }
+
+  void sety(double y_)
+  {
+    y = y_;
+    lengthOfThis = lengthOfFourVector();
+  }
+
+  void setz(double z_)
+  {
+    z = z_;
+    lengthOfThis = lengthOfFourVector();
+  }
+
+
+  double getlengthOfThis() const
+  {
+    return lengthOfThis;
+  }
+
   FourVector(double t_, double x_, double y_, double z_)
-    :t(t_), x(x_), y(y_), z(z_) {};
+    :t(t_), x(x_), y(y_), z(z_)
+  {
+    lengthOfThis = lengthOfFourVector();
+  }
   // virtual ~FourVector();
 
   FourVector boostAlongZAxis(double beta)
@@ -33,18 +91,12 @@ public:
     return *this;
   }
 
-  double lengthOfFourVector()
-  {
-    double c = 299792458;
-    return -(c*t)*(c*t)+x*x+y*y+z*z;
-  }
-
 };
 
 // Get that FourVector to print out!
 std::ostream& operator<<(std::ostream& os, const FourVector& w)
 {
-  os << "(" << w.t <<", " << w.x << ", " << w.y << ", " << w.z << ")";
+  os << "(" << w.gett() <<", " << w.getx() << ", " << w.gety() << ", " << w.getz() << ")";
   return os;
 }
 
@@ -91,7 +143,7 @@ void pp6day3_menu() {
 	  double a,b,c,d;	// not initialised?!
 	  std::cin >> a >> b >> c >> d;
 	  FourVector w = FourVector(a,b,c,d);
-	  std::cout << w.lengthOfFourVector() << std::endl;
+	  std::cout << w.getlengthOfThis() << std::endl;
 	}
       else if (op == '2')
 	{
